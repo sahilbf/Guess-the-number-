@@ -1,0 +1,67 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "25f1c203-ac0b-44e5-8851-fcf4d6a6ece2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import random\n",
+    "import ipywidgets as widgets\n",
+    "from IPython.display import display, clear_output\n",
+    "\n",
+    "secret_number = random.randint(1, 100)\n",
+    "attempts = 0\n",
+    "guess_input = widgets.BoundedIntText(\n",
+    "    value=0,\n",
+    "    min=1,\n",
+    "    max=100,\n",
+    "    description='Your guess:',\n",
+    "    disabled=False\n",
+    ")\n",
+    "output = widgets.Output()\n",
+    "button = widgets.Button(description=\"Guess!\")\n",
+    "\n",
+    "def on_button_clicked(b):\n",
+    "    global attempts\n",
+    "    guess = guess_input.value\n",
+    "    attempts += 1\n",
+    "    with output:\n",
+    "        clear_output()\n",
+    "        if guess < secret_number:\n",
+    "            print(f\"{guess} try again. Try again!\")\n",
+    "        elif guess > secret_number:\n",
+    "            print(f\"{guess} try again. Try again!\")\n",
+    "        else:\n",
+    "            print(f\"🎉 Congratulations! You guessed it in {attempts} attempts.\")\n",
+    "            button.disabled = True\n",
+    "            guess_input.disabled = True\n",
+    "button.on_click(on_button_clicked)\n",
+    "\n",
+    "display(widgets.VBox([guess_input, button, output]))"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
